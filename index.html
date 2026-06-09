@@ -1,116 +1,135 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>매칭 중...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sync 설치 중</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(160deg, #f7eaff, #e8f0ff);
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #222;
+    }
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
-}
+    .box {
+      width: 86%;
+      max-width: 360px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      border-radius: 28px;
+      padding: 34px 24px;
+      text-align: center;
+      box-shadow: 0 18px 45px rgba(90, 70, 130, 0.18);
+    }
 
-body{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#f5f5f5;
-    overflow:hidden;
-}
+    .icon {
+      width: 82px;
+      height: 82px;
+      border-radius: 24px;
+      margin: 0 auto 18px;
+      background: linear-gradient(135deg, #ff8ac8, #8b7cff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 34px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(139, 124, 255, 0.35);
+    }
 
-/* 로딩 화면 */
-.loading-screen{
-    text-align:center;
-}
+    h1 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -0.5px;
+    }
 
-.heart{
-    font-size:70px;
-    animation:pulse 1.3s infinite;
-}
+    .sub {
+      margin-top: 8px;
+      color: #666;
+      font-size: 14px;
+    }
 
-.loading-text{
-    margin-top:20px;
-    font-size:28px;
-    font-weight:600;
-}
+    .bar-wrap {
+      margin-top: 30px;
+      width: 100%;
+      height: 12px;
+      background: #eee;
+      border-radius: 999px;
+      overflow: hidden;
+    }
 
-.dots::after{
-    content:"";
-    animation:dots 1.5s infinite;
-}
+    .bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff8ac8, #8b7cff);
+      border-radius: 999px;
+      animation: install 5s forwards;
+    }
 
-@keyframes dots{
-    0%{content:"";}
-    25%{content:".";}
-    50%{content:"..";}
-    75%{content:"...";}
-    100%{content:"";}
-}
+    .status {
+      margin-top: 16px;
+      font-size: 15px;
+      color: #444;
+    }
 
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.15);}
-    100%{transform:scale(1);}
-}
+    .dots::after {
+      content: "";
+      animation: dots 1.2s infinite;
+    }
 
-/* 매칭 완료 */
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.25);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    opacity:0;
-    pointer-events:none;
-    transition:.4s;
-}
+    @keyframes install {
+      0% { width: 0%; }
+      25% { width: 28%; }
+      55% { width: 62%; }
+      80% { width: 86%; }
+      100% { width: 100%; }
+    }
 
-.overlay.show{
-    opacity:1;
-}
+    @keyframes dots {
+      0% { content: ""; }
+      33% { content: "."; }
+      66% { content: ".."; }
+      100% { content: "..."; }
+    }
 
-.popup{
-    background:white;
-    padding:28px 40px;
-    border-radius:30px;
-    font-size:34px;
-    font-weight:500;
-    transform:scale(.8);
-    transition:.4s;
-}
-
-.overlay.show .popup{
-    transform:scale(1);
-}
-</style>
+    .done {
+      display: none;
+      margin-top: 22px;
+      font-size: 15px;
+      color: #7b61ff;
+      font-weight: 600;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="box">
+    <div class="icon">S</div>
+    <h1>Sync</h1>
+    <div class="sub">가상연애 채팅 앱</div>
 
-<div class="loading-screen">
-    <div class="heart">💜</div>
-    <div class="loading-text">
-        매칭 중<span class="dots"></span>
+    <div class="bar-wrap">
+      <div class="bar"></div>
     </div>
-</div>
 
-<div class="overlay" id="overlay">
-    <div class="popup">
-        매칭되었습니다! 💜
+    <div class="status">
+      앱 설치 중<span class="dots"></span>
     </div>
-</div>
 
-<script>
-setTimeout(() => {
-    document.getElementById("overlay").classList.add("show");
-}, 5000);
-</script>
+    <div class="done" id="done">
+      설치가 완료되었습니다
+    </div>
+  </div>
 
+  <script>
+    setTimeout(() => {
+      document.querySelector(".status").textContent = "Sync 실행 준비 중...";
+      document.getElementById("done").style.display = "block";
+    }, 5200);
+  </script>
 </body>
 </html>
