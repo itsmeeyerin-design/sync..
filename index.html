@@ -4,89 +4,135 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sync 설치 중</title>
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
+      width: 100vw;
       height: 100vh;
-      background: linear-gradient(160deg, #f7eaff, #e8f0ff);
-      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
+      background: #ffd6df;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #222;
-    }
-
-    .box {
-      width: 86%;
-      max-width: 360px;
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(18px);
-      border-radius: 28px;
-      padding: 34px 24px;
-      text-align: center;
-      box-shadow: 0 18px 45px rgba(90, 70, 130, 0.18);
-    }
-
-    .icon {
-      width: 82px;
-      height: 82px;
-      border-radius: 24px;
-      margin: 0 auto 18px;
-      background: linear-gradient(135deg, #ff8ac8, #8b7cff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 34px;
-      font-weight: 700;
-      box-shadow: 0 10px 25px rgba(139, 124, 255, 0.35);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 25px;
-      letter-spacing: -0.5px;
-    }
-
-    .sub {
-      margin-top: 8px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .bar-wrap {
-      margin-top: 30px;
-      width: 100%;
-      height: 12px;
-      background: #eee;
-      border-radius: 999px;
       overflow: hidden;
     }
 
-    .bar {
+    .screen {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      padding: 90px 28px 40px;
+      text-align: center;
+    }
+
+    .app-icon {
+      width: 155px;
+      height: 155px;
+      margin: 0 auto 34px;
+      border-radius: 42px;
+      background: linear-gradient(145deg, #ffb8c4, #ff6781);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 18px 35px rgba(232, 87, 112, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+    }
+
+    .logo {
+      font-size: 52px;
+      font-weight: 500;
+      color: #ffe7b8;
+      letter-spacing: -3px;
+      text-shadow:
+        0 2px 2px rgba(120, 60, 30, 0.28),
+        0 -1px 1px rgba(255, 255, 255, 0.7);
+    }
+
+    h1 {
+      margin: 0 0 58px;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .progress-box {
+      width: 100%;
+      height: 32px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      overflow: hidden;
+      box-shadow: inset 0 0 8px rgba(255, 120, 145, 0.18);
+    }
+
+    .progress {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #ff8ac8, #8b7cff);
       border-radius: 999px;
-      animation: install 5s forwards;
+      background: linear-gradient(90deg, #ff6f91, #ff8aa8);
+      animation: loading 7s forwards;
+    }
+
+    .percent {
+      margin-top: 24px;
+      font-size: 34px;
+      font-weight: 800;
+      color: #ef6685;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
     }
 
     .status {
-      margin-top: 16px;
-      font-size: 15px;
-      color: #444;
+      margin-top: 18px;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -1px;
     }
 
     .dots::after {
       content: "";
       animation: dots 1.2s infinite;
+      color: #ef6685;
     }
 
-    @keyframes install {
+    .notice {
+      margin: 72px auto 0;
+      width: 88%;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 15px;
+      color: #444;
+      box-shadow: 0 8px 20px rgba(255, 120, 145, 0.16);
+    }
+
+    .shield {
+      width: 34px;
+      height: 38px;
+      background: #ff6f91;
+      border-radius: 18px 18px 22px 22px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    @keyframes loading {
       0% { width: 0%; }
       25% { width: 28%; }
-      55% { width: 62%; }
-      80% { width: 86%; }
+      50% { width: 53%; }
+      70% { width: 68%; }
       100% { width: 100%; }
     }
 
@@ -96,40 +142,47 @@
       66% { content: ".."; }
       100% { content: "..."; }
     }
-
-    .done {
-      display: none;
-      margin-top: 22px;
-      font-size: 15px;
-      color: #7b61ff;
-      font-weight: 600;
-    }
   </style>
 </head>
-<body>
-  <div class="box">
-    <div class="icon">S</div>
-    <h1>Sync</h1>
-    <div class="sub">가상연애 채팅 앱</div>
 
-    <div class="bar-wrap">
-      <div class="bar"></div>
+<body>
+  <main class="screen">
+    <div class="app-icon">
+      <div class="logo">sync</div>
     </div>
 
-    <div class="status">
+    <h1>Sync</h1>
+
+    <div class="progress-box">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="percent" id="percent">0%</div>
+
+    <div class="status" id="status">
       앱 설치 중<span class="dots"></span>
     </div>
 
-    <div class="done" id="done">
-      설치가 완료되었습니다
+    <div class="notice">
+      <div class="shield">✓</div>
+      <span>설치가 완료되면 자동으로 실행됩니다.</span>
     </div>
-  </div>
+  </main>
 
   <script>
-    setTimeout(() => {
-      document.querySelector(".status").textContent = "Sync 실행 준비 중...";
-      document.getElementById("done").style.display = "block";
-    }, 5200);
+    let percent = 0;
+    const percentText = document.getElementById("percent");
+    const statusText = document.getElementById("status");
+
+    const timer = setInterval(() => {
+      if (percent < 100) {
+        percent++;
+        percentText.textContent = percent + "%";
+      } else {
+        clearInterval(timer);
+        statusText.textContent = "설치 완료";
+      }
+    }, 70);
   </script>
 </body>
 </html>
